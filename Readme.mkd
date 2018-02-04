@@ -1,0 +1,47 @@
+# SW Makers
+
+[Neomake] makers with Suppressed Warnings
+
+## What it does
+
+This function pretty much explains itself:
+
+```vim
+fun! sw_makers#eslint#ProcessOutput(context) abort
+  let [ errors, warnings ] = s:ParseLines(a:context.output)
+  return empty(errors) ? warnings : errors
+endf
+```
+
+Yes. Only show warnings if there's no errors left.
+
+This way you can focus on fixing all the errors without being bothered by
+low-priority warnings. This keeps you in a tight edit-save-test loop.
+But given that the warnings are worth being fixed anyway, you don't want to
+miss them when you do have the leisure to fix them.
+
+## Installation
+
+Install it with your Vim plugin manager of choice:
+
+```vim
+Plug '5long/sw-makers'
+```
+
+Then add this in your vimrc:
+
+```vim
+let g:neomake_javascript_eslint_maker_process_output = function('sw_makers#eslint#ProcessOutput')
+```
+
+That's pretty much it.
+
+## Supported makers
+
+Only ESLint for now.
+
+## License
+
+Public domain. See the [UNLICENSE](./UNLICENSE) file.
+
+[Neomake]: https://github.com/neomake/neomake
