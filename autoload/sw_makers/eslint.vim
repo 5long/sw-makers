@@ -22,7 +22,7 @@ endf
 
 fun! s:ParseCompactLine(line)
   let end_of_parsed_text = 0
-  let [fn, _, end_of_parsed_text] = matchstrpos(a:line, '^.*\ze: ')
+  let [fn, _, end_of_parsed_text] = matchstrpos(a:line, '^.\{-1,}\ze: ')
 
   if empty(fn)
     return {'valid': v:false, 'text': a:line}
